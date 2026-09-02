@@ -1,0 +1,270 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------- */
+/* Nomi design tokens — source of truth: Nomi PRD v1.2, sections     */
+/* 6 (Typography), 7 (Color), 8 (Background), 9 (Layout),            */
+/* 10 (Borders/Radius/Shadows), Motion timing.                       */
+/* Core color tokens below are exact PRD hex values — do not let a   */
+/* future `shadcn add` re-init overwrite these with oklch defaults.  */
+/* ---------------------------------------------------------------- */
+
+:root {
+  /* Color — light (PRD §7) */
+  --background: #fafafa;
+  --foreground: #18181b;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --popover: #ffffff;
+  --popover-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
+  --ring: #a1a1aa;
+  --primary: #18181b;
+  --primary-foreground: #fafafa;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --input: #e4e4e7;
+  --destructive: #dc2626;
+  --destructive-foreground: #fafafa;
+  --success: #16a34a;
+
+  /* Not in the PRD — kept for shadcn components we haven't built yet,
+     recolored to fit the Nomi neutral palette instead of shadcn's oklch defaults */
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: #fafafa;
+  --sidebar-foreground: #18181b;
+  --sidebar-primary: #18181b;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #f4f4f5;
+  --sidebar-accent-foreground: #18181b;
+  --sidebar-border: #e4e4e7;
+  --sidebar-ring: #a1a1aa;
+
+  /* shadcn's own radius scale — base unit matches PRD control radius (8px) */
+  --radius: 0.5rem;
+
+  /* Radius scale (PRD §10) */
+  --radius-control: 8px;
+  --radius-card-sm: 10px;
+  --radius-image: 14px;
+  --radius-container: 18px;
+
+  /* Spacing scale (PRD §9) — exposed for arbitrary-value use */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --space-40: 160px;
+  --space-48: 192px;
+
+  /* Motion durations (PRD Motion Timing) */
+  --duration-micro: 150ms;
+  --duration-hover: 160ms;
+  --duration-state: 240ms;
+  --duration-panel: 320ms;
+  --duration-hero: 520ms;
+  --duration-generation: 700ms;
+  --ease-out-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-standard: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Container widths (PRD §9) */
+  --container-default: 1280px;
+  --container-wide: 1400px;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #111113;
+  --card-foreground: #fafafa;
+  --popover: #111113;
+  --popover-foreground: #fafafa;
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+  --border: #27272a;
+  --ring: #71717a;
+  --primary: #fafafa;
+  --primary-foreground: #18181b;
+  --secondary: #18181b;
+  --secondary-foreground: #fafafa;
+  --accent: #18181b;
+  --accent-foreground: #fafafa;
+  --input: #27272a;
+  --destructive: #ef4444;
+  --destructive-foreground: #18181b;
+  --success: #22c55e;
+
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: #09090b;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #fafafa;
+  --sidebar-primary-foreground: #18181b;
+  --sidebar-accent: #18181b;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #27272a;
+  --sidebar-ring: #71717a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-input: var(--input);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-control: var(--radius-control);
+  --radius-card-sm: var(--radius-card-sm);
+  --radius-image: var(--radius-image);
+  --radius-container: var(--radius-container);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --container-default: var(--container-default);
+  --container-wide: var(--container-wide);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    color-scheme: light;
+    @apply font-sans;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    @apply bg-background text-foreground;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-control);
+  }
+
+  ::selection {
+    background: var(--foreground);
+    color: var(--background);
+  }
+}
+
+@layer utilities {
+  .transition-standard {
+    transition-property: transform, opacity;
+    transition-duration: var(--duration-state);
+    transition-timing-function: var(--ease-out-standard);
+  }
+}
+
+/* Native <input type="color"> paints its own internal swatch box that ignores
+   normal border/radius styling on the element itself. These pseudo-elements are
+   the only way to shape the actual browser-rendered swatch. */
+input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 9999px;
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 9999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
