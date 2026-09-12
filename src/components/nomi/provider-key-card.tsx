@@ -90,7 +90,7 @@ export function ProviderKeyCard() {
         </span>
       </div>
 
-      <div className="flex gap-1.5" role="radiogroup" aria-label="AI provider">
+            <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="AI provider">
         {PROVIDERS.map((p) => (
           <button
             key={p.id}
