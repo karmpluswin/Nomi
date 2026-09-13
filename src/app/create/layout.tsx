@@ -5,6 +5,6 @@ export default async function CreateLayout({
 }: {
   children: React.ReactNode;
 }) {
-  await auth.protect();
+  await auth.protect({ unauthenticatedUrl: "/sign-in" });
   return <>{children}</>;
 }
